@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import AllMeetUpPage from "./pages/AllMeetUps";
+import FavoritesPage from "./pages/Favorites";
+import NewMeetUpPage from "./pages/NewMeetUp";
+import TodosRoot from "./components/TodosRoot";
+import HomePage from "./pages/HomePage";
+import Layout from "./components/layout/Layout";
+import { FavoritesProvider } from "./store/favorites-context";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <FavoritesProvider>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<HomePage />}></Route>
+          <Route path="/todos" element={<TodosRoot />}></Route>
+          <Route path="/allmeetups" element={<AllMeetUpPage />}></Route>
+          <Route path="/favorites" element={<FavoritesPage />}></Route>
+          <Route path="/newmeetups" element={<NewMeetUpPage />}></Route>
+        </Routes>
+      </Layout>
+    </FavoritesProvider>
   );
 }
 
